@@ -2,6 +2,13 @@
 # Weather History App
 
 The Weather History App is designed for users who want to download and store historical weather data for a foreign country. It provides functionality to retrieve weather information using a free weather API, input specific dates and years, and display maximum and minimum temperatures for those dates. Additionally, the app allows users to store weather data locally using **ROOM database**, ensuring access even without an internet connection.
+## ScreenShot
+![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/1c8e9f91-8820-453a-8258-669d2f18c035)![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/0acb5365-bfd6-49d4-8521-1da470b24811)
+![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/aa912af3-1d90-49bb-974f-fae945ce0ead)![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/f4082e5a-91c8-4a94-80be-386d4d923596)![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/429c5d11-4087-4cff-91f0-cfcccda64e4c)
+![image](https://github.com/DIvineJMd/Historical_weather_app/assets/101663425/ff5d8caa-4d74-4e58-ba52-b3f413eab138)
+
+
+
 
 ## Features
 
@@ -35,7 +42,7 @@ To start using the Weather History App, follow these steps:
 2. **Installation:**
    - Clone this repository to your local machine using the command:
      ```
-     git clone https://github.com/yourusername/weather-history-app.git
+     [git clone https://github.com/yourusername/weather-history-app.git](https://github.com/DIvineJMd/Historical_weather_app.git)
      ```
    - Open the project in Android Studio.
    - Build the project to download necessary dependencies.
