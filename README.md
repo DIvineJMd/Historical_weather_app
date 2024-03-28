@@ -1,4 +1,4 @@
-```markdown
+
 # Weather History App
 
 The Weather History App is designed for users who want to download and store historical weather data for a foreign country. It provides functionality to retrieve weather information using a free weather API, input specific dates and years, and display maximum and minimum temperatures for those dates. Additionally, the app allows users to store weather data locally using **ROOM database**, ensuring access even without an internet connection.
@@ -71,4 +71,4 @@ To start using the Weather History App, follow these steps:
 - Designed a user-friendly interface using Compose UI toolkit.
 - Validates user input and displays appropriate error messages.
 - Provides smooth navigation and intuitive controls.
-```
+
