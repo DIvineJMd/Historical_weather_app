@@ -63,16 +63,15 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
             location = location,
             date = timeList?.getOrNull(0) ?: "",
             time = listOf(timeList?.getOrNull(0) ?: ""),
-            temperature_2m_max = maxTempList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList(),
-            temperature_2m_min = minTempList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList(),
-            rain_sum = rainSumList.takeIf { it.isNotEmpty() }?.average()?.toFloat()?.let { listOf(it) } ?: emptyList(),
-            wind_speed_10m_max = windSpeedMaxList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList(),
-            wind_gusts_10m_max = windGustsMaxList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList(),
-            weather_code = weatherCodeList.takeIf { it.isNotEmpty() }?.average()?.toInt()?.let { listOf(it) } ?: emptyList(),
-            shortwave_radiation_sum = radiationSumList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList(),
-            precipitation_sum = precipitationSumList.takeIf { it.isNotEmpty() }?.average()?.toFloat()?.let { listOf(it) } ?: emptyList(),
-            wind_direction_10m_dominant = windDirectionList.takeIf { it.isNotEmpty() }?.average()?.let { listOf(it) } ?: emptyList()
-        )
+            temperature_2m_max = maxTempList,
+            temperature_2m_min = (minTempList),
+            rain_sum = (rainSumList),
+            wind_speed_10m_max = (windSpeedMaxList),
+            wind_gusts_10m_max = (windGustsMaxList),
+            weather_code = (weatherCodeList),
+            shortwave_radiation_sum = (radiationSumList),
+            precipitation_sum = (precipitationSumList),
+            wind_direction_10m_dominant = (windDirectionList)     )
 
 //            historicalWeatherDao.insertWeather(historicalWeather)
         weatherRepository.insertWeather(historicalWeather)

@@ -179,8 +179,10 @@ class MainScreen {
                                     style = MaterialTheme.typography.headlineSmall,
                                     fontWeight = FontWeight.Bold,)
                                 if (maindata != null) {
-                                    Text(text=maindata.daily.temperature_2m_min.get(0).toString()+"°C",
-                                        color = Color.White,
+                                    val averageTemperature = maindata.daily.temperature_2m_min.averageOrNull()
+                                    val formattedAverageTemperature = averageTemperature?.let { "%.2f".format(it).toFloat() } ?: 0.0f
+
+                                    Text(text = "${formattedAverageTemperature}°C",                                        color = Color.White,
                                         modifier = modifier.align(Alignment.CenterHorizontally),
                                         style = MaterialTheme.typography.headlineSmall,
                                         fontWeight = FontWeight.SemiBold,)
@@ -195,7 +197,10 @@ class MainScreen {
                                     style = MaterialTheme.typography.headlineSmall,
                                     fontWeight = FontWeight.Bold,)
                                 if (maindata != null) {
-                                    Text(text=maindata.daily.temperature_2m_max.get(0).toString()+"°C",
+                                    val averageMaxTemperature = maindata.daily.temperature_2m_max.averageOrNull()
+                                    val formattedAverageMaxTemperature = averageMaxTemperature?.let { "%.2f".format(it).toFloat() } ?: 0.0f
+
+                                    Text(text = "${formattedAverageMaxTemperature}°C",
                                         color = Color.White,
                                         modifier = modifier.align(Alignment.CenterHorizontally),
                                         style = MaterialTheme.typography.headlineSmall,
@@ -203,32 +208,28 @@ class MainScreen {
                                 }
                             }
                         }
-                        Row(modifier.align(Alignment.CenterHorizontally)){
-                            val shortwaveRadiationSum =
-                                maindata?.daily?.shortwave_radiation_sum?.get(0) // Get the shortwave radiation sum
-                            val uvIndex =
-                                (shortwaveRadiationSum?.div(9))?.toInt() // Convert from MJ/m² to UV index
+                        val averageShortwaveRadiationSum = maindata?.daily?.shortwave_radiation_sum?.averageOrNull() ?: 0.0
+                        val uvIndex = (averageShortwaveRadiationSum / 9).toInt()
+                        val averageRainSum = maindata?.daily?.rain_sum?.FaverageOrNull()?.let { "%.2f".format(it) } ?: "0.0"
+                        val averagePrecipitationSum = maindata?.daily?.precipitation_sum?.FaverageOrNull()?.let { "%.2f".format(it) } ?: "0.0"
+                        val averageWindSpeedMax = maindata?.daily?.wind_speed_10m_max?.averageOrNull()?.let { "%.2f".format(it) } ?: "0.0"
+                        val averageWindGustsMin = maindata?.daily?.wind_gusts_10m_max?.averageOrNull()?.let { "%.2f".format(it) } ?: "0.0"
+
+                        Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                             cardinfo(head = "UV Index", Data = uvIndex.toString())
-                            if (maindata != null) {
-                                cardinfo(head = "Rain Sum", Data = maindata.daily.rain_sum.get(0).toString())
-                            }
+                            cardinfo(head = "Rain Sum", Data = averageRainSum)
                         }
-                        Row(modifier.align(Alignment.CenterHorizontally)){
-                            if (maindata != null) {
-                                cardinfo(head = "Precipitation Sum", Data =maindata.daily.precipitation_sum.get(0).toString()+" mm" )
-                            }
-                            if (maindata != null) {
-                                cardinfo(head = "wind Direction", Data =maindata.daily.wind_direction_10m_dominant.get(0).toString()+"°" )
-                            }
+
+                        Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                            cardinfo(head = "Precipitation Sum", Data = "$averagePrecipitationSum mm")
+                            cardinfo(head = "Wind Direction", Data = "${maindata?.daily?.wind_direction_10m_dominant?.get(0)}°")
                         }
-                        Row(modifier.align(Alignment.CenterHorizontally)){
-                            if (maindata != null) {
-                                cardinfo(head = "Wind Speed Max", Data =maindata.daily.wind_gusts_10m_max.get(0).toString() )
-                            }
-                            if (maindata != null) {
-                                cardinfo(head = "Wind Gusts Min", Data =maindata.daily.wind_gusts_10m_max.get(0).toString() )
-                            }
+
+                        Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                            cardinfo(head = "Wind Speed Max", Data = averageWindSpeedMax)
+                            cardinfo(head = "Wind Gusts Min", Data = averageWindGustsMin)
                         }
+
                     }
                 }
 
@@ -236,6 +237,12 @@ class MainScreen {
 
         }
     }
+}
+fun List<Double>.averageOrNull(): Double? {
+    return if (isEmpty()) null else average()
+}
+fun List<Float>.FaverageOrNull(): Double? {
+    return if (isEmpty()) null else average()
 }
 
 @Composable
